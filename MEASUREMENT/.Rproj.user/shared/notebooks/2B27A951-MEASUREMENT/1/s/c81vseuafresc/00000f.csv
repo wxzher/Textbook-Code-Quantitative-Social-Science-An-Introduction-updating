@@ -1,0 +1,6 @@
+"0","mean(afghan$list.response[afghan$list.group == ""ISAF""]) - mean("
+"0","  afghan$list.response[afghan$list.group == ""control""])"
+"1","[1]"
+"1"," 0.04901961"
+"1","
+"

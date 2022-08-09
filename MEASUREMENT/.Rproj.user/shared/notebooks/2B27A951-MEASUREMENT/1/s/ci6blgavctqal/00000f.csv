@@ -1,0 +1,8 @@
+"0","pdf(file = ""Output/hist.pdf"", height = 4, width = 6)"
+"0","## one row with 2 plots with font size 0.8"
+"0","par(mfrow = c(1, 2),cex = 0.8)"
+"0",""
+"0","## for simplicity omit the text and lines from earlier example"
+"0","hist(afghan$age, freq = FALSE,"
+"0","     xlab = ""Age"", ylim = c(0, 0.04),"
+"0","     main = ""Distribution of respondent's age"")"

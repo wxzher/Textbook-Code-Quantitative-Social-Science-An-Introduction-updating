@@ -1,0 +1,7 @@
+"0","pdf(file = ""Output/educ.pdf"", height = 5, width = 6) ## 打开PDF并设置图形区域的宽度和高度"
+"0",""
+"0",""
+"0","boxplot(educ.years ~ province, data = afghan,"
+"0","        main = ""Education by province"", "
+"0","        ylab = ""Year of education"""
+"0","          )"

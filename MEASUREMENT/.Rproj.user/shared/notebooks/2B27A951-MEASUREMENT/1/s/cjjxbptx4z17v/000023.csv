@@ -1,0 +1,4 @@
+"0","par(mfrow = c(1, 2),cex = 0.8)"
+"0","hist(dem112$dwnom2, freq = FALSE, main = ""Democract"","
+"0","     xlim = c(-1.5, 1.5), ylim = c(0,1.75),"
+"0","     xlab = ""Racial liberlism/conservatism dimension"")"

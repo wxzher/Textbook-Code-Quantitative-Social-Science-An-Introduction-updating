@@ -1,0 +1,4 @@
+"0","## Democract"
+"0","plot(names(dem.median), dem.median, col = ""blue"",type = ""l"","
+"0","     xlim = c(80, 115), ylim = c(-1, 1), xlab = ""Congress"", "
+"0","     ylab = ""DW-MOMINATE score(first dimesion)"" )"

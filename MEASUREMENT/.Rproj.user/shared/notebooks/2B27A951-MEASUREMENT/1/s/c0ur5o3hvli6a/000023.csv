@@ -1,0 +1,6 @@
+"0",""
+"0","## scatter plot for the 112th Congress"
+"0",""
+"0","plot(dem112$dwnom1, dem112$dwnom2, pch = 16, col = ""blue"","
+"0","     xlim = lim, ylim = lim, xlab = xlab, ylab = ylab,"
+"0","     main = ""112th Congress"")"

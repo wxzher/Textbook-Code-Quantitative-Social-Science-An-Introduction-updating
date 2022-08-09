@@ -1,0 +1,5 @@
+"0",""
+"0","## 112th Congress"
+"0",""
+"0","plot(dwnom112, col = k112four.out$cluster + 1, xlab = xlab, ylab = ylab,"
+"0","     xlim = lim, ylim = lim, main = ""112th Congress"")"

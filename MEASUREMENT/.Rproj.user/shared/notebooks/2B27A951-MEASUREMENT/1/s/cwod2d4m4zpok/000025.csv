@@ -1,0 +1,2 @@
+"0","## add a vertical line representing median"
+"0","abline(v = median(afghan$educ.years))"

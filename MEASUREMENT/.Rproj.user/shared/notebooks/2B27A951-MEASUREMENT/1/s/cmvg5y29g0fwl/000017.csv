@@ -1,0 +1,6 @@
+"0","## load village data"
+"0","afghan.village <- read.csv(""Datasets/afghan-village.csv"")"
+"0",""
+"0","## box plot for attitude"
+"0","boxplot(altitude ~ village.surveyed, data = afghan.village,"
+"0","        ylab = ""Altitude(meters)"", names = c(""Nonsampled"", ""Sampled"") )"

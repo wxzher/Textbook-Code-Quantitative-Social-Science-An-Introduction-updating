@@ -1,0 +1,7 @@
+"0","## Gini coefficient data"
+"0","gini <- read.csv(""Datasets/USGini.csv"")"
+"0","## time-series plot for partisan difference"
+"0","plot(seq(from = 1947.5, to = 2011.5, by =2),"
+"0","     rep.median - dem.median, xlab = ""Year"","
+"0","     ylab = ""Republican median - \n Democratic median"","
+"0","     main = ""Political polarization"")"

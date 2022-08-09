@@ -1,0 +1,4 @@
+"0",""
+"0","hist(afghan$educ.years, freq = FALSE,"
+"0","     breaks = seq(from = -0.5, to = 18.5, by = 1),"
+"0","     xlab = ""Years of education"", xlim = c(0, 20))"

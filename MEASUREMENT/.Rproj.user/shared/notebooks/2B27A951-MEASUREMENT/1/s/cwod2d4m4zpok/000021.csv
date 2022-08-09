@@ -1,0 +1,5 @@
+"0","## histogram of education. use ""breaks"" to choose bins"
+"0","hist(afghan$educ.years, freq = FALSE, "
+"0","     breaks = seq(from = -0.5, to = 18.5, by = 1),"
+"0","     xlab = ""year of education"","
+"0","     main = ""Distribution of respendent's education"")"

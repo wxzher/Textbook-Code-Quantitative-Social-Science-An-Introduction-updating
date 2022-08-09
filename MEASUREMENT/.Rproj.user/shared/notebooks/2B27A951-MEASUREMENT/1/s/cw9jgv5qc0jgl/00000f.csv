@@ -1,0 +1,4 @@
+"0","## k-means with 4 clusters"
+"0","k80four.out <- kmeans(dwnom80, centers = 4, nstart = 5)"
+"0","k112four.out <- kmeans(dwnom112, centers = 4, nstart = 5) "
+"0",""

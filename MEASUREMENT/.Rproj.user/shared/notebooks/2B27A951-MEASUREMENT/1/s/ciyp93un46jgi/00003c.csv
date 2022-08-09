@@ -1,0 +1,5 @@
+"0","## plotting the results using the labels and "
+"0","## limits defined earlier"
+"0",""
+"0","plot(dwnom80, col = k80four.out$cluster + 1, xlab = xlab, ylab = ylab,"
+"0","     xlim = lim, ylim = lim, main = ""80th Congress"")"

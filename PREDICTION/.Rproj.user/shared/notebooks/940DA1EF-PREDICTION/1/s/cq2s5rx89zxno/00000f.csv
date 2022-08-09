@@ -1,0 +1,5 @@
+"0","## 画图"
+"0","plot(90:1, Obama.pred, type = ""b"", xlim = c(90, 0),"
+"0","     ylim = c(40, 60), col = ""blue"", "
+"0","     xlab = ""Days to the election"","
+"0","     ylab = ""Support for candidate (percentage points)"")"

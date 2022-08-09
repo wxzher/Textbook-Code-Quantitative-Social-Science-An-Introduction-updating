@@ -1,0 +1,4 @@
+"0","boxplot(educ.years ~ province, data = afghan,"
+"0","        main = ""Education by province"", "
+"0","        ylab = ""Year of education"""
+"0","          )"

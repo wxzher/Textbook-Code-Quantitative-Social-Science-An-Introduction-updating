@@ -1,0 +1,3 @@
+"0","## party median for each congress"
+"0","dem.median <- tapply(dem$dwnom1, dem$congress, median)"
+"0","rep.median <- tapply(rep$dwnom1, rep$congress, median)"

@@ -1,0 +1,3 @@
+"0","hist(rep112$dwnom2, freq = FALSE, main = ""Republican"","
+"0","     xlim = c(-1.5, 1.5), ylim = c(0,1.75),"
+"0","     xlab = ""Racial liberlism/conservatism dimension"")"

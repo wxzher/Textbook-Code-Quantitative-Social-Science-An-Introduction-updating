@@ -1,0 +1,78 @@
+##
+## file :Exercise1.R
+## author: wxzher
+## update: 2022-08-08
+## the code for exercie in Chapter4
+##
+
+## 基于博彩市场的预测
+## H：市场可以有效汇总可用信息
+## 分析民主党和共和党候选人在每个州胜利的合同的市场价格来检验这种假设。
+
+## 导入数据
+intrade08 <- read.csv("Datasets/intrade08.csv")
+intrade12 <- read.csv("Datasets/intrade12.csv")
+## 分析数据
+dim(intrade08)
+dim(intrade12)
+summary(intrade08)
+summary(intrade12)
+head(intrade08)
+#### Question 1 ####
+
+## margin
+intrade12$PriceD[is.na(intrade12$PriceD)] <-  0
+intrade12$PriceR[is.na(intrade12$PriceR)] <-  0
+intrade08$margin <- intrade08$PriceD - intrade08$PriceR
+intrade12$margin <- intrade12$PriceD - intrade12$PriceR
+intrade08$margin.fact <- intrade08$VolumeD - intrade08$VolumeR 
+intrade12$margin.fact <- intrade12$VolumeD - intrade12$VolumeR
+## convert to a Date object
+
+intrade08$day <- as.Date(intrade08$day)
+intrade12$day <- as.Date(intrade12$day)
+
+## compute Day to election
+intrade08$DaytoElection <- as.Date("2008-11-04") - intrade08$day
+intrade12$DaytoElection <- as.Date("2012-11-06") - intrade12$day
+
+## 
+state.names1 <- unique(intrade08$statename) 
+length(state.names1)
+state.names2 <- unique(intrade12$statename) 
+state.names2
+length(state.names2)
+
+## create a new vector
+intrade08.pred <- rep(NA, 51)
+intrade12.pred <- rep(NA, 50)
+intrade08.fact.mar <- rep(NA, 51)
+intrade12.fact.mar <- rep(NA, 50)
+
+names(intrade08.pred) <- state.names1
+names(intrade12.pred) <- state.names2
+
+for(i in 1:51){
+  data <- subset(intrade08, subset = (statename == state.names1[i]))
+  Beforeaday <- subset(data, DaytoElection == 1)
+  length(Beforeaday)
+  intrade08.pred[i] <- Beforeaday$margin
+  intrade08.fact.mar[i] <- Beforeaday$margin.fact
+}
+
+
+for(i in 1:50){
+  data <- subset(intrade12, subset = (statename == state.names2[i]))
+  Beforeaday <- subset(data, DaytoElection == 1)
+  intrade12.pred[i] <- Beforeaday$margin
+  intrade12.fact.mar[i] <- Beforeaday$margin.fact
+}
+intrade08.pred
+intrade12.pred
+intrade08.fact.mar
+intrade12.fact.mar
+
+subset(intrade12, DaytoElection == 1)
+
+#### Question 2 ####
+

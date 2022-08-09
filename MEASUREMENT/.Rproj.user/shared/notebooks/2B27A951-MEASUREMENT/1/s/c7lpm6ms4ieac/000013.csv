@@ -1,0 +1,4 @@
+"0","qqplot(dem112$dwnom2, rep112$dwnom2, xlab = ""Democract"","
+"0","       ylab = ""Republicans"", xlim = c(-1.5, 1.5), "
+"0","       ylim = c(-1.5, 1.5), "
+"0","       main = ""Racial liberalism/conservatism dimension"")"

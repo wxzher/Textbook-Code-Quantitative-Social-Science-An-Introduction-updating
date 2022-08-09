@@ -1,0 +1,3 @@
+"0","## box plot for log population"
+"0","boxplot(log(population) ~ village.surveyed, data = afghan.village,"
+"0","        ylab = ""Log population"", names = c(""Nonsampled"", ""Sampled"") )"

@@ -1,0 +1,6 @@
+"0","cor(gini$gini[seq(from = 2, to = nrow(gini), by = 2)],"
+"0","    rep.median - dem.median)"
+"1","[1]"
+"1"," 0.9418128"
+"1","
+"

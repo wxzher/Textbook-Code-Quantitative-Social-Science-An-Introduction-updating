@@ -1,0 +1,2 @@
+"0","## print income data for first 10 respondents"
+"0","head(afghan , n = 10)"

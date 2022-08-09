@@ -1,0 +1,2 @@
+"0","## command for plotting curly braces and text in blue are omitted"
+"0","boxplot(afghan$age, main = ""Distribution of age"", ylab = ""Age"", ylim = c(10, 80))"

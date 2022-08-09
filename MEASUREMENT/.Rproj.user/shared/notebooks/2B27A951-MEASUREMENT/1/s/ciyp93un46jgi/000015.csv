@@ -1,0 +1,3 @@
+"0","##plotting the centeoids"
+"0","points(k112four.out$centers, pch = 8, cex = 2)"
+"0",""
