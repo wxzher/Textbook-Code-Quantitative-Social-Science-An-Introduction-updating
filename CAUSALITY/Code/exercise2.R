@@ -50,6 +50,10 @@ tapply(Study1.wave1$ssm, Study1.wave1$treatment, mean)
 # 差距也不是非常大，这说明干预随机分配使得这五组调查对象基本相同。
 
 #### Question 2 ####
+## 计算控制组的两次访谈的结果差异
+NoContact1.wave1.mean <- mean(NoContact1$ssm[NoContact1$wave == 2]) - 
+  mean(NoContact1$ssm[NoContact1$wave == 1])
+NoContact1.wave1.mean
 
 # 获取第一个研究数据中同性恋宣传对同性恋话题第一次和第二次结果的效果
 
@@ -63,13 +67,14 @@ SSMbyGay1.wave2 <- SSMbyGay1$ssm[SSMbyGay1$wave == 2]
 # 计算平均值
 mean(SSMbyGay1.wave2)
 
-# 差值
-mean(SSMbyGay1.wave1) - mean(SSMbyGay1.wave2)
+# 计算DID
+DiD.gay1wave2 <- (mean(SSMbyGay1.wave2) - mean(SSMbyGay1.wave1)) - NoContact1.wave1.mean
+DiD.gay1wave2
 
 # 获取第一个研究数据中异性恋宣传对同性恋话题第一次和第二次结果的效果
 SSMbyStra1.wave1 <- SSMbyStra1$ssm[SSMbyStra1$wave == 1]
 
-# 计算平均值
+# 计算平均宣传值
 mean(SSMbyStra1.wave1)
 
 SSMbyStra1.wave2 <- SSMbyStra1$ssm[SSMbyStra1$wave == 2]
@@ -77,9 +82,11 @@ SSMbyStra1.wave2 <- SSMbyStra1$ssm[SSMbyStra1$wave == 2]
 # 计算平均值
 mean(SSMbyStra1.wave2)
 
-# 差值
-mean(SSMbyStra1.wave1) - mean(SSMbyStra1.wave2)
-
+# 计算DiD
+DiD.stra1wave2 <- (mean(SSMbyStra1.wave2) - mean(SSMbyStra1.wave1)) - NoContact1.wave1.mean
+DiD.stra1wave2
+## 计算差值
+DiD.gay1wave2 - DiD.stra1wave2
 #### Question 3 ####
 # 获取同性恋和异性恋鼓励回收废品的脚本的数据
 RecyclebyGay1 <- subset(gay, subset = ((gay$study == 1)&
@@ -95,44 +102,54 @@ mean(RecyclebyGay1.wave2)
 
 RecyclebyStra1.wave2 <- RecyclebyStra1$ssm[RecyclebyStra1$wave == 2]
 mean(RecyclebyStra1.wave2)
+## 获取第一次访谈结果
+RecyclebyGay1.wave1 <- RecyclebyGay1$ssm[RecyclebyGay1$wave == 1]
+mean(RecyclebyGay1.wave1)
+
+RecyclebyStra1.wave1 <- RecyclebyStra1$ssm[RecyclebyStra1$wave == 1]
+mean(RecyclebyStra1.wave1)
 
 # 比较
-# 回收废品话题中的同性恋宣传者和异性恋宣传者
-mean(RecyclebyGay1.wave2) - mean(RecyclebyStra1.wave2)
+# 回收废品话题中的同性恋宣传者DID
+DiD.RGay1wave2 <- (mean(RecyclebyGay1.wave2) - mean(RecyclebyGay1.wave1)) - NoContact1.wave1.mean
+DiD.RGay1wave2
+# 同性恋话题中异性恋宣传者DID
+DiD.Rstar1wave2 <- (mean(RecyclebyStra1.wave2) - mean(RecyclebyStra1.wave1)) - NoContact1.wave1.mean
+DiD.Rstar1wave2
 
-# 同性恋话题中的同性恋宣传者和异性恋宣传者
-mean(SSMbyGay1.wave2) - mean(SSMbyStra1.wave2)
-
-# 同性恋宣传者针对同性恋话题和回收废品话题
-mean(SSMbyGay1.wave2) - mean(RecyclebyGay1.wave2)
-
-# 异性恋宣传者针对同性恋话题和回收废品话题
-mean(SSMbyStra1.wave2) - mean(RecyclebyStra1.wave2)
+# 比较
+DiD.gay1wave2
 
 
 #### Question 4 ####
 
 # 定义一个函数
+# 计算控制组的mean
+NoContact1.mean <- data.frame(mean = tapply(NoContact1$ssm, NoContact1$wave, mean))
+NoContact1.mean
 
 getSSMeffect <- function(x){
   ## 
   ## Args: data.frame
-  ## return: 七轮的平均值
+  ## return: 每轮的平均效果
   ## 计算第一项研究中XXX对同性恋脚本的每轮效果的平均值
-  count <- (1:7)
+  count <- (2:7)
   output <- c()
   for (i in count) {
-    meanEffect <-mean(x$ssm[x$wave == i ])
-    output[i] <- meanEffect
+    meanNoContact <- NoContact1.mean[i, 1] - NoContact1.mean[1, 1] 
+    meanEffect <-mean(x$ssm[x$wave == i]) - mean(x$ssm[x$wave == 1]) - meanNoContact
+    output[i - 1] <- meanEffect
     
   }
   return(output)
   
 }
 
+
 # 每轮同性恋宣传同性恋脚本的平均效果
 SSMbyGay1.mean <- getSSMeffect(SSMbyGay1)
 SSMbyStra1.mean <- getSSMeffect(SSMbyStra1)
+
 
 # 展示
 
@@ -167,47 +184,49 @@ Study2.Wave1.mean
 Study2.Wave2.mean
 
 ## 计算平均干预效应
-Study2DIDgay1 <- (Study2Wave2b[2,1] - Study2Wave1b[2,1]) - (Study2Wave2b[1,1] - Study2Wave1b[1,1])
-Study2DIDgay1 - DIDgay1
+DiD.gay2wave1 <- (Study2.Wave2.mean[2,1] - Study2.Wave1.mean[2,1]) - (Study2.Wave2.mean[1,1] - Study2.Wave1.mean[1,1])
+DiD.gay2wave1 - DiD.gay1wave1
 
 ## 第二次研究第二轮的平均干预效应稍大于第一次研究第二轮的平均干预效应。
 
 
 #### Question 6 ####
 
+# 计算控制组的mean
+NoContact2 <- subset(gay,subset =((gay$study == 2)& 
+                                    (gay$treatment == "No Contact")) )
+NoContact2.mean <- data.frame(mean = tapply(NoContact2$ssm, NoContact2$wave, mean))
+NoContact2.mean
 
-# 计算异性恋宣讲者的同性恋婚姻脚本的每轮ssm平均分
-Study2WaveMean <- function(x){
-  Study2wavex <- subset(gay, gay$study == 2 & gay$wave == x)
-  Study2wavexa <- tapply(Study2wavex$ssm, Study2wavex$treatment, mean)
-  Study2wavexb <- as.data.frame(Study2wavexa)
-  Study2wavexb
+getSSMeffect2 <- function(x){
+  ## 
+  ## Args: data.frame
+  ## return: 每轮的平均效果
+  ## 计算第一项研究中XXX对同性恋脚本的每轮效果的平均值
+  count <- (2:7)
+  count <- count[-c(4,5)]
+  output <- c()
+  for (i in 1:4) {
+    meanNoContact <- NoContact2.mean[i + 1, 1] - NoContact2.mean[1, 1] 
+    meanEffect <-mean(x$ssm[x$wave == count[i]]) - mean(x$ssm[x$wave == 1]) - meanNoContact
+    output[i] <- meanEffect
+    
+  }
+  return(output)
+  
 }
-Study2wave3b <- Study2WaveMean(3)
-Study2wave4b <- Study2WaveMean(4)
-Study2wave7b <- Study2WaveMean(7)
-## 计算同性恋宣传者的同性恋婚姻脚本的每轮平均效应
-Study2DIDgay <- function(x){
-  Study2DIDgay <- (Study2WaveMean(x)[2,] - Study2WaveMean(x-1)[2,]) - (Study2WaveMean(x)[1,] - Study2WaveMean(x-1)[1,])
-  Study2DIDgay
-}
-Study2DIDgay1 <- Study2DIDgay(2)
-Study2DIDgay2 <- Study2DIDgay(3)
-Study2DIDgay3 <- Study2DIDgay(4)
+## 获取数据框
+SSMbyGay2 <- subset(gay, (gay$study == 2)& 
+                      (gay$treatment == "Same-Sex Marriage Script by Gay Canvasser"))
+SSMbyGay2.mean <- getSSMeffect2(SSMbyGay2)
 
-Study2DIDgay1
 
-Study2DIDgay2
 
-Study2DIDgay3
-
-Study2DIDgay6 <- (Study2WaveMean(7)[2,] - Study2WaveMean(4)[2,]) - (Study2WaveMean(7)[1,] - Study2WaveMean(4)[1,])
 ## 用数据框对比展示
-Study2df <- data.frame("second" = c(DIDgay1, Study2DIDgay1), "third" = c(DIDgay2, Study2DIDgay2), "fourth" = c(DIDgay3, Study2DIDgay3), "seventh" = c(DIDgay6, Study2DIDgay6))
-row.names(Study2df) <- c("Study1", "Study2")
-Study2df
+Studydf <- data.frame("study1" = SSMbyGay1.mean[c(1,2,3,6)], "study2" = SSMbyGay2.mean )
+rownames(Studydf) <- c(2, 3 ,4,7)  
 
-
+Studydf
 
 
 
